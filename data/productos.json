@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "codigo": "PROD-001",
+    "nombre": "Caja de guantes nitrilo",
+    "descripcion": "Guantes desechables talla M",
+    "categoria": "Bioseguridad",
+    "precio": 28000,
+    "cantidad": 45,
+    "stockMinimo": 10,
+    "ubicacion": {
+      "bodega": "Bodega Norte",
+      "zona": "A",
+      "torre": "T1",
+      "estanteria": "E2",
+      "modulo": "M1",
+      "posicion": "P3"
+    },
+    "activo": true,
+    "fechaCreacion": "2026-03-24T08:00:00"
+  },
+  {
+    "id": 2,
+    "codigo": "PROD-002",
+    "nombre": "Resma papel carta",
+    "descripcion": "Papel blanco 75 gr",
+    "categoria": "Papelería",
+    "precio": 19000,
+    "cantidad": 12,
+    "stockMinimo": 8,
+    "ubicacion": {
+      "bodega": "Bodega Norte",
+      "zona": "B",
+      "torre": "T1",
+      "estanteria": "E1",
+      "modulo": "M2",
+      "posicion": "P1"
+    },
+    "activo": true,
+    "fechaCreacion": "2026-03-24T08:30:00"
+  },
+  {
+    "id": 3,
+    "codigo": "PROD-003",
+    "nombre": "Monitor 24 pulgadas",
+    "descripcion": "Monitor LED Full HD",
+    "categoria": "Tecnología",
+    "precio": 520000,
+    "cantidad": 6,
+    "stockMinimo": 5,
+    "ubicacion": {
+      "bodega": "Bodega Sur",
+      "zona": "C",
+      "torre": "T2",
+      "estanteria": "E3",
+      "modulo": "M4",
+      "posicion": "P2"
+    },
+    "activo": true,
+    "fechaCreacion": "2026-03-24T09:00:00"
+  },
+  {
+    "id": 4,
+    "codigo": "PROD-004",
+    "nombre": "Silla ergonómica",
+    "descripcion": "Silla ejecutiva negra",
+    "categoria": "Mobiliario",
+    "precio": 780000,
+    "cantidad": 3,
+    "stockMinimo": 2,
+    "ubicacion": {
+      "bodega": "Bodega Central",
+      "zona": "A",
+      "torre": "T3",
+      "estanteria": "E1",
+      "modulo": "M1",
+      "posicion": "P5"
+    },
+    "activo": true,
+    "fechaCreacion": "2026-03-24T09:15:00"
+  },
+  {
+    "id": 5,
+    "codigo": "PROD-005",
+    "nombre": "Botella de limpieza",
+    "descripcion": "Desinfectante multiusos 1L",
+    "categoria": "Aseo",
+    "precio": 15000,
+    "cantidad": 0,
+    "stockMinimo": 6,
+    "ubicacion": {
+      "bodega": "Bodega Central",
+      "zona": "D",
+      "torre": "T1",
+      "estanteria": "E4",
+      "modulo": "M3",
+      "posicion": "P6"
+    },
+    "activo": true,
+    "fechaCreacion": "2026-03-24T09:30:00"
+  }
+]

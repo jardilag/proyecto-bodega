@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistema de Bodega - Login</title>
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+  <main class="hero-login">
+    <div class="container login-layout">
+      <section class="card info-panel">
+        <h1>Sistema web para logística de productos</h1>
+        <p>Proyecto CRUD académico para gestionar inventario, ubicación física y compra simulada de productos en bodega.</p>
+        <ul>
+          <li>Administrador: registra, edita, elimina y ajusta stock.</li>
+          <li>Cliente: consulta productos y simula compras.</li>
+          <li>Ubicación completa: bodega, zona, torre, estantería, módulo y posición.</li>
+          <li>Persistencia local con <strong>localStorage</strong>.</li>
+        </ul>
+        <p class="small-text muted">Usuarios de prueba: <strong>admin/admin</strong> y <strong>cliente/cliente</strong>.</p>
+      </section>
+
+      <section class="card login-panel">
+        <h2>Iniciar sesión</h2>
+        <form id="loginForm">
+          <label>
+            Usuario
+            <input id="username" type="text" placeholder="Ingrese usuario" required />
+          </label>
+          <label>
+            Contraseña
+            <input id="password" type="password" placeholder="Ingrese contraseña" required />
+          </label>
+          <div class="actions">
+            <button class="btn" type="submit">Ingresar</button>
+            <button class="btn secondary" type="button" id="resetDataBtn">Restablecer datos</button>
+          </div>
+        </form>
+        <div id="loginMessage" class="message info" hidden></div>
+      </section>
+    </div>
+  </main>
+
+  <script src="./js/storage.js"></script>
+  <script src="./js/utils.js"></script>
+  <script src="./js/auth.js"></script>
+</body>
+</html>

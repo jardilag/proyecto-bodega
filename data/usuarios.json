@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "username": "admin",
+    "password": "admin",
+    "rol": "ADMIN",
+    "nombre": "Administrador de Bodega"
+  },
+  {
+    "id": 2,
+    "username": "cliente",
+    "password": "cliente",
+    "rol": "CLIENTE",
+    "nombre": "Usuario Comprador"
+  }
+]

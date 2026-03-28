@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Movimientos - Bodega</title>
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <div>
+        <h1>Historial de movimientos</h1>
+        <p class="muted">Registro de creación, actualización, ajustes y compras.</p>
+      </div>
+      <div class="toolbar-actions">
+        <a class="btn secondary" href="./admin.html">Volver al panel</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding: 1.25rem 0 2rem;">
+    <section class="card panel">
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Tipo</th>
+              <th>Código</th>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Usuario</th>
+              <th>Detalle</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
+          <tbody id="allMovementTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+    <p class="footer-note">Este historial se almacena en localStorage y sirve como trazabilidad académica del sistema.</p>
+  </main>
+
+  <script src="./js/storage.js"></script>
+  <script src="./js/utils.js"></script>
+  <script src="./js/movimientos.js"></script>
+  <script src="./js/ui.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      await initializeAppData();
+      const session = requireSession(['ADMIN']);
+      if (!session) return;
+      renderMovements('allMovementTableBody');
+    });
+  </script>
+</body>
+</html>

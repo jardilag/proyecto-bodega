@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel Administrador - Bodega</title>
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+
+<body class="page-admin">
+  <header class="header">
+    <div class="container header-inner">
+      <div>
+        <h1>Panel del administrador</h1>
+        <p class="muted">Gestión de inventario y ubicación física en bodega.</p>
+      </div>
+      <div class="toolbar-actions">
+        <span id="currentUser" class="muted"></span>
+        <a class="btn secondary" href="./movimientos.html">Ver movimientos</a>
+        <button class="btn" type="button" id="openProductModalBtn">Registrar producto</button>
+        <button class="btn danger" id="logoutBtn">Cerrar sesión</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-grid">
+    <section class="content-stack full-width">
+      <div id="summaryCards" class="summary-grid"></div>
+
+      <section class="card panel">
+        <h2>Inventario</h2>
+        <div class="filters">
+          <input id="searchInput" type="text" placeholder="Buscar por código, nombre, categoría o ubicación" />
+          <select id="bodegaFilter"></select>
+          <select id="estadoFilter">
+            <option value="">Todos los estados</option>
+            <option value="Disponible">Disponible</option>
+            <option value="Stock bajo">Stock bajo</option>
+            <option value="Agotado">Agotado</option>
+          </select>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Categoría</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Estado</th>
+                <th>Ubicación</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="inventoryTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card panel">
+        <h2>Movimientos recientes</h2>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Tipo</th>
+                <th>Código</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Usuario</th>
+                <th>Detalle</th>
+                <th>Fecha</th>
+              </tr>
+            </thead>
+            <tbody id="movementTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <!-- MODAL REGISTRAR / EDITAR PRODUCTO -->
+  <div id="productModal" class="modal" hidden>
+    <div class="modal-overlay" id="closeProductModalOverlay"></div>
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="formTitle">Registrar producto</h2>
+        <button class="modal-close" type="button" id="closeProductModalBtn">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <section class="card panel modal-form-panel">
+          <form id="productForm" class="form-grid modal-form-grid">
+            <input type="hidden" id="productId" />
+
+            <div>
+              <label>Código</label>
+              <input id="codigo" type="text" required />
+            </div>
+
+            <div>
+              <label>Nombre</label>
+              <input id="nombre" type="text" required />
+            </div>
+
+            <div class="full">
+              <label>Descripción</label>
+              <textarea id="descripcion"></textarea>
+            </div>
+
+            <div>
+              <label>Categoría</label>
+              <input id="categoria" type="text" />
+            </div>
+
+            <div>
+              <label>Precio</label>
+              <input id="precio" type="number" min="0" required />
+            </div>
+            <div>
+              <label>Cantidad</label>
+              <input id="cantidad" type="number" min="0" required />
+            </div>
+            <div>
+              <label>Stock mínimo</label>
+              <input id="stockMinimo" type="number" min="0" value="5" required />
+            </div>
+
+            <div>
+              <label>Bodega</label>
+              <input id="bodega" type="text" required />
+            </div>
+
+            <div>
+              <label>Zona</label>
+              <input id="zona" type="text" required />
+            </div>
+
+            <div>
+              <label>Torre</label>
+              <input id="torre" type="text" required />
+            </div>
+
+            <div>
+              <label>Estantería</label>
+              <input id="estanteria" type="text" required />
+            </div>
+
+            <div>
+              <label>Módulo</label>
+              <input id="modulo" type="text" required />
+            </div>
+
+            <div>
+              <label>Posición</label>
+              <input id="posicion" type="text" required />
+            </div>
+
+            <div class="full inline-actions modal-actions">
+              <button class="btn" type="submit">Guardar producto</button>
+              <button class="btn secondary" type="button" id="cancelEditBtn" hidden>Cancelar edición</button>
+              <button class="btn danger" type="button" id="resetSystemBtn">Restablecer sistema</button>
+            </div>
+          </form>
+
+          <div id="adminMessage" class="message info" hidden></div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/storage.js"></script>
+  <script src="./js/utils.js"></script>
+  <script src="./js/movimientos.js"></script>
+  <script src="./js/productos.js"></script>
+  <script src="./js/ui.js"></script>
+  <script src="./js/admin.js"></script>
+</body>
+
+</html>
