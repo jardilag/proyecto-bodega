@@ -1,3 +1,5 @@
+const normalizeFilterValue = (value) => String(value || '').trim().toLowerCase();
+
 document.addEventListener('DOMContentLoaded', async () => {
   if (!document.body.classList.contains('page-client')) return;
   await initializeAppData();
@@ -11,24 +13,36 @@ document.addEventListener('DOMContentLoaded', async () => {
   const bodegaFilter = document.getElementById('clientBodegaFilter');
 
   function fillFilters(productos) {
-    const categorias = [...new Set(productos.map((item) => item.categoria).filter(Boolean))];
-    const bodegas = [...new Set(productos.map((item) => item.ubicacion?.bodega).filter(Boolean))];
+    const selectedCategory = categoryFilter.value;
+    const selectedBodega = bodegaFilter.value;
+
+    const categorias = [...new Set(productos.map((item) => item.categoria).filter(Boolean))]
+      .sort((a, b) => String(a).localeCompare(String(b), 'es', { sensitivity: 'base' }));
+    const bodegas = [...new Set(productos.map((item) => item.ubicacion?.bodega).filter(Boolean))]
+      .sort((a, b) => String(a).localeCompare(String(b), 'es', { sensitivity: 'base' }));
 
     categoryFilter.innerHTML = '<option value="">Todas las categorías</option>' + categorias.map((item) => `<option value="${item}">${item}</option>`).join('');
     bodegaFilter.innerHTML = '<option value="">Todas las bodegas</option>' + bodegas.map((item) => `<option value="${item}">${item}</option>`).join('');
+
+    if (categorias.includes(selectedCategory)) {
+      categoryFilter.value = selectedCategory;
+    }
+    if (bodegas.includes(selectedBodega)) {
+      bodegaFilter.value = selectedBodega;
+    }
   }
 
   function getFilteredProducts() {
     const productos = productoService.getAll();
     const search = searchInput.value.trim().toLowerCase();
-    const categoria = categoryFilter.value;
-    const bodega = bodegaFilter.value;
+    const categoria = normalizeFilterValue(categoryFilter.value);
+    const bodega = normalizeFilterValue(bodegaFilter.value);
 
     return productos.filter((producto) => {
       const locationText = buildLocationText(producto.ubicacion).toLowerCase();
       const matchesSearch = !search || producto.codigo.toLowerCase().includes(search) || producto.nombre.toLowerCase().includes(search) || locationText.includes(search);
-      const matchesCategory = !categoria || producto.categoria === categoria;
-      const matchesBodega = !bodega || producto.ubicacion?.bodega === bodega;
+      const matchesCategory = !categoria || normalizeFilterValue(producto.categoria) === categoria;
+      const matchesBodega = !bodega || normalizeFilterValue(producto.ubicacion?.bodega) === bodega;
       return matchesSearch && matchesCategory && matchesBodega;
     });
   }

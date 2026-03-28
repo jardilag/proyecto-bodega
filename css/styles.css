@@ -104,6 +104,34 @@ textarea { min-height: 92px; resize: vertical; }
   flex-wrap: wrap;
 }
 
+/* Consistent minimum vertical rhythm across views */
+.panel > * + * {
+  margin-top: 1rem;
+}
+
+form:not(.form-grid) {
+  display: grid;
+  gap: 0.9rem;
+}
+
+label + input,
+label + select,
+label + textarea {
+  margin-top: 0.35rem;
+}
+
+.filters,
+.product-actions,
+.modal-actions,
+form .actions,
+form .inline-actions {
+  margin-top: 0.5rem;
+}
+
+.filters {
+  margin-bottom: 0.75rem;
+}
+
 .header {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
@@ -322,18 +350,7 @@ th { background: #f8fafc; }
   justify-content: center;
 }
 
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-}
-
-.form-grid .full {
-  grid-column: 1 / -1;
-}
-
 .form-grid input,
-.form-grid textarea,
 .form-grid select {
   width: 100%;
   box-sizing: border-box;
@@ -342,6 +359,13 @@ th { background: #f8fafc; }
 .form-grid textarea {
   min-height: 90px;
   resize: vertical;
+}
+
+#descripcion {
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+  min-height: 120px;
 }
 
 @media (max-width: 1024px) {
@@ -355,7 +379,7 @@ th { background: #f8fafc; }
 }
 
 @media (max-width: 640px) {
-  .form-grid { grid-template-columns: 1fr; }
+  form.form-grid { grid-template-columns: 1fr; }
   .cart-item { grid-template-columns: 1fr; }
   .header-inner { align-items: flex-start; flex-direction: column; }
 }

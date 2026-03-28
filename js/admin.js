@@ -1,3 +1,39 @@
+function normalizeText(value) {
+  return String(value || '').trim().split(/\s+/).filter(Boolean).join(' ');
+}
+
+function toTitleCase(value) {
+  return normalizeText(value)
+    .toLocaleLowerCase('es-CO')
+    .split(' ')
+    .map((word) => (word ? word.charAt(0).toLocaleUpperCase('es-CO') + word.slice(1) : ''))
+    .join(' ');
+}
+
+function withLocationPrefix(value, prefix) {
+  const cleanValue = toTitleCase(value);
+  if (!cleanValue) return '';
+
+  const cleanPrefix = toTitleCase(prefix);
+  const valueLower = cleanValue.toLocaleLowerCase('es-CO');
+  const prefixLower = cleanPrefix.toLocaleLowerCase('es-CO');
+
+  if (valueLower === prefixLower) {
+    return cleanPrefix;
+  }
+
+  if (valueLower.startsWith(prefixLower)) {
+    let withoutPrefix = cleanValue.slice(cleanPrefix.length).trimStart();
+    while (withoutPrefix.startsWith(':') || withoutPrefix.startsWith('-')) {
+      withoutPrefix = withoutPrefix.slice(1).trimStart();
+    }
+    const normalizedTail = toTitleCase(withoutPrefix);
+    return normalizedTail ? `${cleanPrefix} ${normalizedTail}` : cleanPrefix;
+  }
+
+  return `${cleanPrefix} ${cleanValue}`;
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   if (!document.body.classList.contains('page-admin')) return;
 
@@ -103,20 +139,20 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   function getFormData() {
     const data = {
-      codigo: document.getElementById('codigo').value.trim(),
-      nombre: document.getElementById('nombre').value.trim(),
-      descripcion: document.getElementById('descripcion').value.trim(),
-      categoria: document.getElementById('categoria').value.trim(),
+      codigo: normalizeText(document.getElementById('codigo').value),
+      nombre: normalizeText(document.getElementById('nombre').value),
+      descripcion: normalizeText(document.getElementById('descripcion').value),
+      categoria: normalizeText(document.getElementById('categoria').value),
       precio: Number(document.getElementById('precio').value),
       cantidad: Number(document.getElementById('cantidad').value),
       stockMinimo: Number(document.getElementById('stockMinimo').value),
       ubicacion: {
-        bodega: document.getElementById('bodega').value.trim(),
-        zona: document.getElementById('zona').value.trim(),
-        torre: document.getElementById('torre').value.trim(),
-        estanteria: document.getElementById('estanteria').value.trim(),
-        modulo: document.getElementById('modulo').value.trim(),
-        posicion: document.getElementById('posicion').value.trim()
+        bodega: withLocationPrefix(document.getElementById('bodega').value, 'Bodega'),
+        zona: withLocationPrefix(document.getElementById('zona').value, 'Zona'),
+        torre: withLocationPrefix(document.getElementById('torre').value, 'Torre'),
+        estanteria: withLocationPrefix(document.getElementById('estanteria').value, 'Estanteria'),
+        modulo: withLocationPrefix(document.getElementById('modulo').value, 'Modulo'),
+        posicion: withLocationPrefix(document.getElementById('posicion').value, 'Posicion')
       }
     };
 
